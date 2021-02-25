@@ -1,0 +1,14 @@
+img {
+    height: 30vh;
+}
+
+.view-window {
+    height: 50vh;
+    width: 30vw;
+    overflow-y: hidden;
+    margin-left: 20px;
+}
+
+gallery {
+    display: flex;
+}

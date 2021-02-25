@@ -1,10 +1,32 @@
-<!doctype html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-    <script src="/js/vue.js"></script>
-    <script src="/js/axios.min.js"></script>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gallery</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <header>
+            <h1>Gallery</h1>
+        </header>
+
+        <div id="main">
+            <h2>{{name}}</h2>
+            <gallery>
+                <div
+                    class="view-window"
+                    v-for="image in images"
+                    :key="image.id"
+                >
+                    <img v-bind:src="image.url" />
+                    <p>{{image.title}}</p>
+                    <p>{{image.description}}</p>
+                </div>
+            </gallery>
+        </div>
+        <script src="/js/vue.js"></script>
+        <script src="/js/axios.min.js"></script>
+        <script src="/js/script.js"></script>
+    </body>
 </html>
