@@ -13,6 +13,22 @@
 
         <div id="main">
             <h2>{{name}}</h2>
+            <form enctype="multipart/form-data">
+                <input
+                    v-model="title"
+                    type="text"
+                    name="title"
+                    placeholder="title"
+                />
+                <input
+                    @change="handleChange"
+                    type="file"
+                    name="file"
+                    accept="image/*"
+                />
+
+                <button @click.prevent="handleClick">submit</button>
+            </form>
             <gallery>
                 <div
                     class="view-window"
