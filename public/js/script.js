@@ -1,17 +1,18 @@
 (function () {
     console.log("hooked");
     Vue.component("my-component", {
-        template: "template",
+        template: "#childTemplate",
         data: function () {
             return {
-                name: "guitong",
-                count: 1,
+                name: "ok",
+
+                img: "",
             };
         },
+        props: ["aProp"],
         methods: {
-            updateCount: function () {
-                console.log("zaz");
-                this.count++;
+            zoomOut: function () {
+                console.log("goodbye");
             },
         },
     });
@@ -20,12 +21,17 @@
         data: {
             name: "Pixel Zoo",
             images: [],
+            username: "",
+            title: "",
+            description: "",
+            file: "",
+            toggle: true,
         },
 
         mounted: function () {
             console.log("im mounted");
             var self = this;
-            console.log("upper", this);
+            // console.log("upper", this);
             axios
                 .get("/gallery")
                 .then(function (imagelist) {
@@ -58,6 +64,15 @@
             handleChange: function (e) {
                 console.log(e.target.files);
                 this.file = e.target.files[0];
+            },
+            zoomOut: function () {
+                console.log("goodbye");
+            },
+            zoomImg: function () {
+                console.log("this", this);
+            },
+            close: function () {
+                this.toggle = false;
             },
         },
     });

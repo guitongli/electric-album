@@ -40,8 +40,8 @@
                 />
                 <button @click.prevent="handleClick">submit</button>
             </form>
-            <gallery>
-                <my-component></my-component>
+            <div class = 'gallery'>
+                <my-component v-if="toggle" @click ="zoomImg" v-bind:aProp = 'images'></my-component>
                 <div
                     class="view-window"
                     v-for="image in images"
@@ -52,13 +52,14 @@
                     <p>{{image.title}}</p>
                     <p>{{image.description}}</p>
                 </div>
-            </gallery>
+            </div>
         </div>
         <!-- this script code must be before other js files. it has to have id and typeset text/x-template-->
-        <script id ='template' type = "text/x-template">
+        <script id ='childTemplate' type = "text/x-template">
         <!-- one element is allowed to wrap / @click='this.count++'-->
-        <div class="component-template"><h1>hello{{name}}{{count}}</h1>
-        <button @click="updateCount">countup!</button>
+        <div id = 'childComponent'>
+          <h1>jo</h1>
+        <button @click="close">goodbye!</button>
         </div>
     </script>
         <script src="/js/vue.js"></script>
