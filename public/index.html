@@ -26,7 +26,18 @@
                     name="file"
                     accept="image/*"
                 />
-
+                <input
+                    v-model="username"
+                    type="text"
+                    name="username"
+                    placeholder="username"
+                />
+<input
+                    v-model="description"
+                    type="text"
+                    name="description"
+                    placeholder="description"
+                />
                 <button @click.prevent="handleClick">submit</button>
             </form>
             <gallery>

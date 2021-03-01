@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const db = require("./db");
 app.use(express.static("public"));
+const { s3Url } = require("./config.json");
+
+const { s3upload } = require("./s3");
 
 const multer = require("multer");
 const uidSafe = require("uid-safe");
@@ -37,13 +40,25 @@ app.get("/gallery", (req, res) => {
         })
         .catch((err) => console.log(err));
 });
-app.post("/upload", uploader.single("file"), (req, res) => {
-    console.log("file", req.file, "body", req.body);
+app.post("/upload", uploader.single("file"), s3upload, (req, res) => {
     if (req.file) {
         res.json({ succes: true });
     } else {
         res.json({ success: false });
         console.log("why");
     }
+    console.log("file", req.file, "body", req.body);
+
+    const { title, username, description } = req.body;
+
+    const { filename } = req.file;
+    db.insertImg(s3Url + filename, username, title, description)
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((err) => {
+            console.log("save to db problem", err);
+        });
 });
+app.get("/images");
 app.listen(8080, () => console.log("hi"));

@@ -28,8 +28,8 @@ new Vue({
             formData.append("title", this.title);
             // formData.append("description", this.description);
             formData.append("file", this.file);
-            console.log("formdata", formData);
-            console.log("file", this.file);
+            formData.append("description", this.description);
+            formData.append("username", this.username);
             axios
                 .post("/upload", formData)
                 .then((response) => {
