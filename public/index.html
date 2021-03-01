@@ -41,14 +41,14 @@
                 <button @click.prevent="handleClick">submit</button>
             </form>
             <div class = 'gallery'>
-                <my-component v-if="toggle" @click ="zoomImg" v-bind:aProp = 'images'></my-component>
+                <my-component v-if="itemInfo" v-on:zoom-out ="zoomOut" v-bind:src = 'itemInfo'></my-component>
                 <div
                     class="view-window"
                     v-for="image in images"
                     :key="image.id"
                 >
                 
-                    <img v-bind:src="image.url" />
+                    <img v-bind:src="image.url" @click = "zoomIn(image)" />
                     <p>{{image.title}}</p>
                     <p>{{image.description}}</p>
                 </div>
@@ -58,8 +58,11 @@
         <script id ='childTemplate' type = "text/x-template">
         <!-- one element is allowed to wrap / @click='this.count++'-->
         <div id = 'childComponent'>
-          <h1>jo</h1>
-        <button @click="close">goodbye!</button>
+          <img v-bind:src = "src.url">
+          <h2>{{src.username}}</h2>
+          <h3>{{src.title}}</h3>
+          <h3>{{src.description}}</h3>
+                  <button @click="close">zoom out</button>
         </div>
     </script>
         <script src="/js/vue.js"></script>

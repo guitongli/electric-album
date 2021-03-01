@@ -9,10 +9,16 @@
                 img: "",
             };
         },
-        props: ["aProp"],
+        props: ["src"],
+        mounted: function () {
+            console.log("component mounted now");
+            console.log(this);
+        },
         methods: {
-            zoomOut: function () {
-                console.log("goodbye");
+            close: function (e) {
+                console.log("closing it");
+                this.$emit("zoom-out");
+                e.preventDefault();
             },
         },
     });
@@ -26,6 +32,7 @@
             description: "",
             file: "",
             toggle: true,
+            itemInfo: null,
         },
 
         mounted: function () {
@@ -36,7 +43,6 @@
                 .get("/gallery")
                 .then(function (imagelist) {
                     console.log(imagelist);
-                    console.log("down", this);
                     self.images = imagelist.data;
                 })
                 .catch(function (err) {
@@ -65,15 +71,16 @@
                 console.log(e.target.files);
                 this.file = e.target.files[0];
             },
+
+            zoomIn: function (info) {
+                this.itemInfo = info;
+            },
             zoomOut: function () {
-                console.log("goodbye");
+                this.itemInfo = null;
             },
-            zoomImg: function () {
-                console.log("this", this);
-            },
-            close: function () {
-                this.toggle = false;
-            },
+            // close: function () {
+            //     this.toggle = false;
+            // },
         },
     });
 })();

@@ -12,3 +12,26 @@ img {
 .gallery {
     display: flex;
 }
+
+#childComponent {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to right, lightgray, lightblue);
+}
+#childComponent img {
+    width: 50vw;
+    height: auto;
+    justify-self: center;
+}
+#childComponent button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
