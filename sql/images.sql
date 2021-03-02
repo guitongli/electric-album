@@ -1,4 +1,6 @@
+DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS images;
+
 
 CREATE TABLE images(
     id SERIAL PRIMARY KEY,
@@ -8,6 +10,14 @@ CREATE TABLE images(
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+CREATE TABLE comments(
+    id SERIAL PRIMARY KEY,
+    image_id INTEGER NOT NULL UNIQUE REFERENCES images (id),
+    username VARCHAR NOT NULL,
+    content VARCHAR NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 
 INSERT INTO images (url, username, title, description) VALUES (
     'https://s3.amazonaws.com/imageboard/jAVZmnxnZ-U95ap2-PLliFFF7TO0KqZm.jpg',
@@ -28,4 +38,23 @@ INSERT INTO images (url, username, title, description) VALUES (
     'discoduck',
     'To be or not to be',
     'That is the question.'
+);
+
+INSERT INTO comments (image_id, username, content) 
+VALUES (
+    '1',
+    'kitty',
+    'he is so pink.'
+);
+INSERT INTO comments (image_id, username, content) 
+VALUES (
+    '2',
+    'guffy',
+    'wait for me.'
+);
+INSERT INTO comments (image_id, username, content) 
+VALUES (
+    '3',
+    'micky',
+    'donald duck.'
 );

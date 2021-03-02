@@ -1,18 +1,72 @@
 (function () {
     console.log("hooked");
-    Vue.component("my-component", {
-        template: "#childTemplate",
+    Vue.component("your-component", {
+        template: "#yourTemplate",
         data: function () {
             return {
-                name: "ok",
-
-                img: "",
+                username: "",
+                comments: "",
+                comment: "",
             };
         },
+        props: ["id"],
+        mounted: function () {
+            var self = this;
+            // console.log("sub component mounted now");
+            console.log("id", this.id.id);
+            axios
+                .get(`/comments/${self.id.id}`)
+                .then(function (commentlist) {
+                    self.comments = commentlist.data;
+                    console.log(commentlist);
+                })
+                .catch(function (err) {
+                    console.log("error in axios", err);
+                });
+        },
+        methods: {
+            sendComment: function (e) {
+                e.preventDefault();
+                var self = this;
+                var name = this.username;
+                var id = this.id.id;
+                var content = this.comment;
+                var newEntry = {
+                    username: name,
+                    image_id: id,
+                    comment: content,
+                };
+
+                axios
+                    .post(`/comment`, newEntry)
+                    .then(function (commentlist) {
+                        console.log(commentlist);
+                        self.comments = commentlist.data;
+                        axios
+                            .get("self.id")
+                            .then((commentlist) => {
+                                self.comments = commentlist.data.rows;
+                                console.log(self.comments);
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                    })
+                    .catch(function (err) {
+                        console.log("error in axios", err);
+                    });
+            },
+        },
+    });
+    Vue.component("my-component", {
+        template: "#myTemplate",
+        data: function () {
+            return {};
+        },
         props: ["src"],
+
         mounted: function () {
             console.log("component mounted now");
-            console.log(this);
         },
         methods: {
             close: function (e) {

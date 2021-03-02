@@ -60,5 +60,20 @@ app.post("/upload", uploader.single("file"), s3upload, (req, res) => {
             console.log("save to db problem", err);
         });
 });
+
+app.get("/comments/:id", (req, res) => {
+    const image_id = req.params.id;
+    db.getComments(image_id)
+        .then((result) => {
+            console.log(result);
+            res.json(result.rows);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+app.post("/comment", (req, res) => {
+    console.log("body", req.body);
+});
 app.get("/images");
 app.listen(8080, () => console.log("hi"));

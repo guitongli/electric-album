@@ -18,3 +18,17 @@ module.exports.insertImg = (url, username, title, description) => {
     const params = [url, username, title, description];
     return db.query(q, params);
 };
+
+module.exports.getComments = (image_id) => {
+    const q = `SELECT * FROM comments
+    WHERE image_id = $1;`;
+    const params = [image_id];
+    return db.query(q, params);
+};
+
+module.exports.insertCom = (image_id, username, content) => {
+    const q = `INSERT INTO comments (image_id, username, content)
+    VALUES ($1, $2, $3);`;
+    const params = [image_id, username, content];
+    return db.query(q, params);
+};

@@ -41,7 +41,9 @@
                 <button @click.prevent="handleClick">submit</button>
             </form>
             <div class = 'gallery'>
+                <div></div>
                 <my-component v-if="itemInfo" v-on:zoom-out ="zoomOut" v-bind:src = 'itemInfo'></my-component>
+                <your-component v-if="itemInfo"  v-bind:id='itemInfo' ></your-component>
                 <div
                     class="view-window"
                     v-for="image in images"
@@ -55,16 +57,50 @@
             </div>
         </div>
         <!-- this script code must be before other js files. it has to have id and typeset text/x-template-->
-        <script id ='childTemplate' type = "text/x-template">
+        <script id ='myTemplate' type = "text/x-template">
         <!-- one element is allowed to wrap / @click='this.count++'-->
-        <div id = 'childComponent'>
+        <div class='myTemplate'>
           <img v-bind:src = "src.url">
           <h2>{{src.username}}</h2>
           <h3>{{src.title}}</h3>
           <h3>{{src.description}}</h3>
+
+           
                   <button @click="close">zoom out</button>
         </div>
     </script>
+    <script id ='yourTemplate' type = "text/x-template">
+        <div class ='comment'>
+             <form enctype="multipart/form-data">
+                 <h1>Add a Comment!</h1>
+                 <div class = 'input-flex'>
+                        <p>Comment</p>
+                       <input
+                            v-model="comment"
+                            type="text"
+                            name="comment"
+                            placeholder="Comment"
+                        />
+                                <p>Username</p>
+                        <input
+                            v-model="username"
+                            type="text"
+                            name="username"
+                            placeholder="username"
+                        />
+                        <button @click = "sendComment">Submit</button>
+                    </div>
+                </form>
+            
+            <div v-if = 'comments' class = 'existing-comments' v-for='comment in comments'>
+                <p>{{comment.content}}</p>
+                {{comment.username}} {{comment.created_at}} 
+        
+            </div>
+        
+        </div>
+    </script>
+    
         <script src="/js/vue.js"></script>
         <script src="/js/axios.min.js"></script>
         <script src="/js/script.js"></script>
