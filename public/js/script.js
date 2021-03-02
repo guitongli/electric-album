@@ -31,14 +31,13 @@
                 var name = this.username;
                 var id = this.id.id;
                 var content = this.comment;
-                var newEntry = {
+                var body = {
                     username: name,
                     image_id: id,
                     comment: content,
                 };
 
-                axios
-                    .post(`/comment`, newEntry)
+                axios.post('/comment', {a: "march"})
                     .then(function (commentlist) {
                         console.log(commentlist);
                         self.comments = commentlist.data;
