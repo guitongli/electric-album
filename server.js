@@ -74,8 +74,7 @@ app.get("/comments/:id", (req, res) => {
 });
 app.post("/comment", (req, res) => {
     console.log("he posted oh");
-    console.log(req)
-    res.status("200")
-});
+    console.log(req)});
+
 app.get("/images");
 app.listen(8080, () => console.log("hi"));
