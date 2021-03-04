@@ -1,43 +1,101 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+    background-color: rgb(243, 236, 236);
+}
 @media only screen and (max-width: 600px) {
     .gallery {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
     }
 }
 img {
-    height: 30vh;
+    height: 40vh;
+}
+header{
+    /* background-color: aquamarine; */
+    opacity: 0.7;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100vw;
+    height: 60px;
 }
 
+input {
+     outline: none;
+    border-radius: 5px;
+    border-color: blanchedalmond;
+}
+button {
+    outline: none;
+    border-radius: 5px;
+    border-color: blanchedalmond;
+
+}
 .view-window {
-    height: 50vh;
-    width: 30vw;
+    
+    
     overflow-y: hidden;
-    margin-left: 20px;
+    margin-left: 20px; 
+    display: inline-block
 }
 
 .gallery {
-    display: flex;
+   /* display: flex; */
+   margin-top: 20px;
 }
 
-#childComponent {
-    position: absolute;
-    width: 100vw;
+.detail-container {
+    
     height: 100vh;
+    width: 100vw;
     margin: 0;
-    top: 0;
+    position: fixed;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to right, lightgray, lightblue);
+    /* background-image: linear-gradient(to right, lightgray, lightblue); */
+    background-color: rgb(127, 255, 212,0.3);
 }
-#childComponent img {
+.detail-container img {
     width: 50vw;
     height: auto;
     justify-self: center;
+    z-index: 0;
 }
-#childComponent button {
+.detail-container button {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 80px;
+    right: 40px;
 }
+
+.comment {
+    z-index: 1000;
+    position: fixed;
+   bottom: 0;
+    display: flex;
+    background-color:pink;
+    border-radius: 10px;
+    
+}
+.comments {
+    display: block;
+    overflow-x: hidden;
+}
+
+.upload {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.more {
+    width: 100vw;
+    text-align: center;
+    
+}
+.more :hover {
+        background-color: rosybrown;
+    }
