@@ -8,13 +8,13 @@
     </head>
     <body>
         <header>
-            <h1>Frontend Designer collections</h1>
+            <h1>Frontend Design Elements and Examples</h1>
         </header>
 
         <div id="main">
             <h2 v-if = 'toggle'>Thank you for your upload!</h2>
             <h2 v-if = 'name'>refresh to see latest posts!</h2>
-            <form class = 'upload'enctype="multipart/form-data">
+            <form class = 'upload' enctype="multipart/form-data">
                 <input
                     v-model="title"
                     type="text"
@@ -56,7 +56,7 @@
                     <a v-bind:href = "'#'+image.id"><img v-bind:src="image.url"/></a>
                     <p>{{image.title}}</p>
                     <p>{{image.description}}</p>
-                </div>
+                   </div>
             </div>
 
             <button class ='more' v-if= 'available' @click = 'getMore' >more</button>
@@ -67,12 +67,15 @@
         <div class='myTemplate'>
             <div class = 'detail-container'>
           <img v-bind:src = "src.url">
-          <h2>{{src.username}}</h2>
-          <h3>{{src.title}}</h3>
-          <h3>{{src.description}}</h3>
+          {{src.username}} uploaded {{src.title}} and wrote: "{{src.description}}""
 
-           
-                  <button @click="close"><a href = '/'>zoom out</a></button>
+          <!-- <form method="get" v-bind:action="src.url">
+   <button class = 'download' type="submit">download</button>
+</form> -->
+<a class = 'download' v-bind:href="src.url" v-bind:download="src.title" target="_blank">download</a>
+           <!-- <button class = 'download' @click= 'download(src.url)'> download </button> -->
+      <!-- <button class = 'download' type="submit" onclick="window.open('https://s3.amazonaws.com/spicedling/2BQP6CXCXvvivDbm13QMkmaYyId7yrkJ.jpg')">Download!</button> -->
+           <button class = 'close' @click="close">zoom out</button>
             </div>
         </div>
     </script>
@@ -102,8 +105,8 @@
                     </div>
                 </form>
             
-            <div v-if = 'comments' class = 'existing-comments' v-for='comment in comments'>
-                <p>{{comment.username}}  wrote {{comment.content}}</p>
+            <div v-if = 'comments' class = 'existing-comments' v-for='comment in comments' :key = 'comment.content'>
+                <p>{{comment.username}}  wrote "{{comment.content}}"</p>
                 <p> at {{comment.created_at}} </p>
         
             </div>
